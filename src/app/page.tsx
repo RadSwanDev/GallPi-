@@ -44,7 +44,14 @@ export default function Home() {
   <>
   <Navigation/>
 
-  <div className={`columns-2 md:columns-4 gap-4 mt-20 p-4 h-full`}>
+    <div className="mt-20 flex flex-col items-center">
+      <div className="flex justify-center">
+      <input type="text" className="border-b-2 mx-1 border-b-[#2F3F27]" />
+      <button className="bg-[#2F3F27] p-2 rounded text-white hover:cursor-pointer ">Cari</button>
+      </div>
+      <p className="my-1 text-[#A7AE47] underline mt-2">DISCLAIMER: Input hanya dapat menerima dua kata saja!</p>
+    </div>
+  <div className={`columns-2 md:columns-4 gap-4 mt-5 p-4 h-full`}>
         {data.map((item : {
           webformatURL: string;id : number,user:string, username : string, likes : string, views : string, downloads : string, device : string, iconDevice : number,deviceGap : string
 })=>{
