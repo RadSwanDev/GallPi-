@@ -1,3 +1,4 @@
+/* eslint-disable react-hooks/exhaustive-deps */
 /* eslint-disable @next/next/no-async-client-component */
 /* eslint-disable @next/next/no-img-element */
 "use client"
@@ -22,12 +23,17 @@ export default function Home() {
   const lastTriggerPoint = useRef(null)
   const widthDevice = useWidth()
   const [page,setPage] = useState(1)
+  const [value,setValue] = useState('jakarta')
+  const findSearchEngine = (text :string)=>{
+     const setText = text.replace(/ /g, '+')
+     return setText
+  }
 
   const callApi = async(currentPage : number)=>{
     if(isFetching) return;
     setIsFetching(true)
     try{
-      const response = await fetch(`https://pixabay.com/api/?key=49948897-656b16e360f245897e85c17ff&q=chinese+girls&image_type=photo&pretty=true&page=${currentPage}`)
+      const response = await fetch(`https://pixabay.com/api/?key=49948897-656b16e360f245897e85c17ff&q=${findSearchEngine(value)}&image_type=photo&pretty=true&page=${currentPage}`)
     const datas = await response.json()
     setData((prevData)=> [...prevData, ...datas.hits])
     setPage((prevPage)=> prevPage + 1)
@@ -64,7 +70,7 @@ export default function Home() {
         observer.unobserve(lastTriggerPoint.current)
       }
     }
-  },[callApi,isFetching,page])
+  },[isFetching,page])
 
   if(!data.length && isFetching){
     return( 
@@ -73,7 +79,7 @@ export default function Home() {
     <div className={`columns-2 md:columns-4 gap-4 mt-20 p-4 h-full`}>
     {
       Array(12).fill(null).map((_,index)=>(
-        <CardSkeleton key={index++}/>
+        <CardSkeleton key={index}/>
       ))
     }
     </div>
@@ -84,19 +90,21 @@ export default function Home() {
   <>
   <Navigation/>
 
-    <div className="mt-20 flex flex-col items-center">
+    <div className="mt-20 bg-white p-4 flex flex-col items-center">
       <div className="flex justify-center">
-      <input type="text" className="border-b-2 mx-1 border-b-[#2F3F27]" />
-      <button className="bg-[#2F3F27] p-2 rounded text-white hover:cursor-pointer " onClick={()=> alert("Project masih dalam pembangunan!")} disabled>Cari</button>
+      <input type="text" value={value} onChange={(e)=> setValue(e.target.value)} className="border-b-2 mx-1 w-96 border-b-[#2F3F27]" />
+      <button className="bg-[#2F3F27] p-2 rounded text-white hover:cursor-pointer " onClick={()=>{
+        setData([])
+        setPage(1)
+        callApi(1)}}>Cari</button>
       </div>
-      <p className="my-1 text-[#A7AE47] underline mt-2">DISCLAIMER: Input hanya dapat menerima dua kata saja!</p>
     </div>
   <div className={`columns-2 md:columns-4 gap-4 mt-5 p-4 h-full`}>
         {data.map((item : {
           webformatURL: string;id : number,user:string, username : string, likes : string, views : string, downloads : string, device : string, iconDevice : number,deviceGap : string
 },index)=>{
           return(
-            <div key={index++}>
+            <div key={index}>
               <Card 
                   deviceGap = {widthDevice < 1024 ? "gap-4" : "gap-8"}
                   image={item.webformatURL}
