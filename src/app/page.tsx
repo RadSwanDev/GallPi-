@@ -4,9 +4,10 @@
 "use client"
 import Card from "@/component/card";
 import Navigation from "@/component/navigation";
+import SearchEngine from "@/component/SearchEngine";
 import CardSkeleton from "@/component/UX/cardSkleton";
 import { useWidth } from "@/context/context";
-import { useEffect, useRef, useState } from "react";
+import React, { useEffect, useRef, useState } from "react";
 export default function Home() {
   const [data,setData] = useState<{
     webformatURL : string;
@@ -90,15 +91,12 @@ export default function Home() {
   <>
   <Navigation/>
 
-    <div className="mt-20 bg-white p-4 flex flex-col items-center">
-      <div className="flex justify-center">
-      <input type="text" value={value} onChange={(e)=> setValue(e.target.value)} className="border-b-2 mx-1 w-96 border-b-[#2F3F27]" />
-      <button className="bg-[#2F3F27] p-2 rounded text-white hover:cursor-pointer " onClick={()=>{
-        setData([])
-        setPage(1)
-        callApi(1)}}>Cari</button>
-      </div>
-    </div>
+    <SearchEngine value={value} cValue={(e : React.ChangeEvent<HTMLInputElement>)=> setValue(e.target.value)} cClick={()=>{
+      setData([])
+      setPage(1)
+      callApi(1)
+    }} ></SearchEngine>
+    
   <div className={`columns-2 md:columns-4 gap-4 mt-5 p-4 h-full`}>
         {data.map((item : {
           webformatURL: string;id : number,user:string, username : string, likes : string, views : string, downloads : string, device : string, iconDevice : number,deviceGap : string

@@ -12,9 +12,9 @@ export default function Card({image,username,likes,views,downloads,device,iconDe
     </p>
     <hr className="bg-[#547246]" />
     <div className={`flex ${deviceGap} mt-4 justify-center text-[#415936]`}>
-        <p className="flex flex-col items-center"><img src="heart.svg" alt="heart" width={iconDevice} /> {likes}</p>
-        <p className="flex flex-col items-center"><img src="eye (1).svg" alt="eye" width={iconDevice } />{views}</p>
-        <p className="flex flex-col items-center"><img src="download.svg" alt="download" width={iconDevice} />{downloads}</p>
+        <p className="flex flex-col items-center  lg:w-30 md: w-20"><img src="heart.svg" alt="heart" width={iconDevice} /> {likes}</p>
+        <p className="flex flex-col items-center lg:30 md: w-20"><img src="eye (1).svg" alt="eye" width={iconDevice } />{views}</p>
+        <p className="flex flex-col items-center lg:30 md: w-20"><img src="download.svg" alt="download" width={iconDevice} />{downloads}</p>
     </div>
     </div>
     </>
