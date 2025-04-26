@@ -39,7 +39,6 @@ export default function Home() {
     </>
     )
   }
-  console.log(data)
   return (
   <>
   <Navigation/>
@@ -47,7 +46,7 @@ export default function Home() {
     <div className="mt-20 flex flex-col items-center">
       <div className="flex justify-center">
       <input type="text" className="border-b-2 mx-1 border-b-[#2F3F27]" />
-      <button className="bg-[#2F3F27] p-2 rounded text-white hover:cursor-pointer ">Cari</button>
+      <button className="bg-[#2F3F27] p-2 rounded text-white hover:cursor-pointer " onClick={()=> alert("Project masih dalam pembangunan!")} disabled>Cari</button>
       </div>
       <p className="my-1 text-[#A7AE47] underline mt-2">DISCLAIMER: Input hanya dapat menerima dua kata saja!</p>
     </div>
