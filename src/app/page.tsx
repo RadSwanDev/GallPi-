@@ -10,7 +10,7 @@ export default function Home() {
   // eslint-disable-next-line @typescript-eslint/no-explicit-any
   const [data, setData] = useState<any[]>([]);
   const [isFetching, setIsFetching] = useState(false);
-  const [hasMore, setHasMore] = useState(true); // ✅ tambahkan indikator apakah masih bisa fetch
+  const [hasMore, setHasMore] = useState(true); 
   const lastTriggerPoint = useRef(null);
   const widthDevice = useWidth();
   const [page, setPage] = useState(1);
@@ -31,7 +31,7 @@ export default function Home() {
       const datas = await response.json();
 
       if (datas.hits.length === 0) {
-        setHasMore(false); // ✅ hentikan fetch jika tidak ada data baru
+        setHasMore(false);
         return;
       }
 
